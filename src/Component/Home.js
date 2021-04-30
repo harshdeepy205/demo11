@@ -23,20 +23,20 @@ const Home = () => {
   const [name, setName] = useState('')
   // const [allNames, setAllNames] = useState(["Person1", "Person2", "Person3", "Person4", "Person5", "Person6"])
   const allNames = ["Person1", "Person2", "Person3", "Person4", "Person5", "Person6"]
-  const [node1, setNode1] = useState([])
-  const [node2, setNode2] = useState([])
+  const [node1, setNode1] = useState(["Node1", "Node2", "Node3", "Node4", "Node5", "Node6"])
+  const [distance, setDistance] = useState(["22", "25", "26", "19", "32", "30"])
 
 
   const [flag, setFlag] = useState(true)
   const [finalValues, setFinalValues] = useState({
-    "person1": "",
-    "person2": "",
-    "amount": ""
+    "node1": "",
+    "node2": "",
+    "distance": ""
   })
   const [items, setItems] = useState([])
   const [outputList, setOutputList] = useState([])
 
-  const { person1, person2, amount } = finalValues;
+  // const { node1, node2, distance} = finalValues;
 
   const [inputGraphData, setInputGraphData] = useState({})
   const [inputGraphConfig, setInputGraphConfig] = useState({})
@@ -78,6 +78,56 @@ const Home = () => {
 
   const handleOpenForm = () => {
     setFlag(!false)
+  }
+
+  const finalForm = () =>{
+    return(
+      <div>
+
+        <TableContainer component={Paper} className="table">
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+              <TableCell>
+                <InputLabel>Node 1</InputLabel>
+                <Select onChange={handleFinalChange("node1")}>
+                    {/* {<MenuItem value="Select" selected>Select</MenuItem> */}
+                    {allNames.map(item =>
+                    ((allNames !== item.name) ? <MenuItem value={item}>{item}</MenuItem> : <></>
+                    ))
+                    }
+                </Select>
+                </TableCell>
+
+                <TableCell>
+                <InputLabel>Node 2</InputLabel>
+                <Select onChange={handleFinalChange("node2")}>
+                    {/* {<MenuItem value="Select" selected>Select</MenuItem> */}
+                    {node1.map(item =>
+                    ((node1 !== item.name) ? <MenuItem value={item}>{item}</MenuItem> : <></>
+                    ))
+                    }
+                </Select>
+                </TableCell>
+
+                <TableCell>
+                <InputLabel>Amount</InputLabel>
+                <Select onChange={handleFinalChange("distance")}>
+                    {/* {<MenuItem value="Select" selected>Select</MenuItem> */}
+                    {distance.map(item =>
+                    ((distance !== item.name) ? <MenuItem value={item}>{item}</MenuItem> : <></>
+                    ))
+                    }
+                </Select>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+          </Table>
+        </TableContainer>
+
+        <Button>Submit</Button>
+      </div>
+    )
   }
 
   const myForm = () => {
@@ -265,35 +315,8 @@ const Home = () => {
 
   return (
     <div>
-      <div className="name-component">
-        {/* <div className="p-name">
-          <h2>Enter names of People in the group</h2>
-          <div className="p-name-field">
-            <TextField id="outlined-basic" label="Name"
-              variant="outlined"
-              value={name}
-              disabled={flag}
-              onChange={handleChange} />
-          </div>
-          <Button variant="contained"
-            color="primary"
-            onClick={addParticipant}
-          >
-            View Names
-                </Button>
-        </div> */}
-        {/* {allNames && allNames.length ? ( */}
-        {/* <> */}
-        {/* <div className="list-div">
-              <div className="list-all-names"> */}
-        {/* {listOfNames()} */}
-        {/* </div>
-            </div> */}
-        {/* <Button variant="contained" color="secondary" onClick={handleOpenForm}>Submit</Button> */}
-        {/* // </> */}
-        {/* // ) : null} */}
-
-      </div>
+      {/* <div className="name-component">
+      </div> */}
 
       {
         flag ? (
@@ -391,6 +414,9 @@ const Home = () => {
           </>
         ) : null
       }
+
+      {finalForm()}
+
     </div >
   )
 }
